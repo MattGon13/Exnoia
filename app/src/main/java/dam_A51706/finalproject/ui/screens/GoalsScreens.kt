@@ -19,6 +19,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft
+import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Star
@@ -114,17 +115,6 @@ fun TitleCard() {
                 .align(Alignment.Center)
                 .graphicsLayer(scaleX = 2.8f, scaleY = 2.8f)
         )
-        IconButton(
-            onClick = {},
-            modifier = Modifier.align(Alignment.TopStart)
-        ) {
-            Icon(
-                Icons.AutoMirrored.Filled.KeyboardArrowLeft,
-                contentDescription = stringResource(R.string.go_back),
-                tint = colorScheme.onTertiary,
-                modifier = Modifier.height(50.dp).width(50.dp)
-            )
-        }
         Text(
             "Goals", color = colorScheme.onTertiary,
             style = MaterialTheme.typography.titleLarge,
@@ -147,12 +137,28 @@ fun GoalCard(goalTitle: String) {
             containerColor = colorScheme.secondary
         )
     ) {
-        Row(modifier = Modifier.padding(top = 5.dp, bottom = 5.dp, start = 15.dp)) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween,
+            modifier = Modifier
+                .padding(top = 5.dp, bottom = 5.dp, start = 15.dp, end = 15.dp)
+                .fillMaxWidth()
+        ) {
             Text(
                 text = goalTitle,
                 style = MaterialTheme.typography.labelLarge,
                 modifier = Modifier.padding(10.dp, 20.dp)
             )
+            IconButton(
+                onClick = {}
+            ) {
+                Icon(
+                    Icons.AutoMirrored.Filled.KeyboardArrowRight,
+                    contentDescription = stringResource(R.string.go_back),
+                    tint = colorScheme.tertiary,
+                    modifier = Modifier.height(50.dp).width(50.dp)
+                )
+            }
         }
     }
 }
