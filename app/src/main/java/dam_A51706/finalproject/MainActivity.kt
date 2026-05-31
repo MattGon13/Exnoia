@@ -25,9 +25,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import dam_A51706.finalproject.ui.screens.GoalsPortrait
+import dam_A51706.finalproject.ui.screens.LoginScreenPortrait
 import dam_A51706.finalproject.ui.screens.MainScreenPortrait
 import dam_A51706.finalproject.ui.screens.MonthStats
 import dam_A51706.finalproject.ui.screens.NavigationBar
+import dam_A51706.finalproject.ui.screens.RegisterScreenPortrait
 import dam_A51706.finalproject.ui.screens.StatItem
 
 
@@ -37,7 +40,10 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             ExnoiaAppTheme() {
-                MainScreenPortrait()
+                //MainScreenPortrait()
+                //LoginScreenPortrait()
+                //RegisterScreenPortrait()
+                GoalsPortrait()
             }
         }
     }

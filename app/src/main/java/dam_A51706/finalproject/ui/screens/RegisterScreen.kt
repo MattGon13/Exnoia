@@ -5,12 +5,14 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -27,8 +29,11 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -57,22 +62,6 @@ fun RegisterScreenPortrait() {
             Spacer(modifier = Modifier.height(10.dp))
 
             RegisterCard()
-
-            Spacer(modifier = Modifier.height(50.dp))
-
-            Row(
-                horizontalArrangement = Arrangement.End,
-                modifier = Modifier.fillMaxWidth()
-            ){
-                Image(
-                    painter = painterResource(R.drawable.simbolo_extended),
-                    contentDescription = stringResource(R.string.star_icon),
-                    modifier = Modifier
-                        .size(250.dp)
-                        .graphicsLayer()
-                        .padding(start = 100.dp)
-                )
-            }
         }
     }
 }
@@ -102,8 +91,10 @@ fun RegisterCard(){
                     focusedBorderColor = colorScheme.onSecondary,
                     unfocusedBorderColor = colorScheme.secondary,
                     unfocusedTextColor = colorScheme.onSecondary,
+                    focusedTextColor = colorScheme.onSecondary,
                     cursorColor = colorScheme.onSecondary,
-                    unfocusedContainerColor = colorScheme.secondary
+                    unfocusedContainerColor = colorScheme.secondary,
+                    focusedContainerColor = colorScheme.secondary
                 ),
             )
 
@@ -114,13 +105,13 @@ fun RegisterCard(){
                 onValueChange = {},
                 modifier = Modifier.padding(horizontal = 5.dp),
                 colors = OutlinedTextFieldDefaults.colors(
-                    focusedBorderColor = colorScheme.secondary,
-                    focusedLabelColor = colorScheme.secondary,
+                    focusedBorderColor = colorScheme.onSecondary,
                     unfocusedBorderColor = colorScheme.secondary,
-                    unfocusedLabelColor = colorScheme.onSecondary,
-                    unfocusedTextColor = colorScheme.onPrimary,
-                    cursorColor = colorScheme.onPrimary,
-                    unfocusedContainerColor = colorScheme.secondary
+                    unfocusedTextColor = colorScheme.onSecondary,
+                    focusedTextColor = colorScheme.onSecondary,
+                    cursorColor = colorScheme.onSecondary,
+                    unfocusedContainerColor = colorScheme.secondary,
+                    focusedContainerColor = colorScheme.secondary
                 ),
             )
             Button(

@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -16,6 +17,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.magnifier
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft
@@ -41,8 +43,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.LineHeightStyle
@@ -86,8 +90,10 @@ fun GoalsPortrait() {
                             focusedBorderColor = colorScheme.onSecondary,
                             unfocusedBorderColor = colorScheme.secondary,
                             unfocusedTextColor = colorScheme.onSecondary,
+                            focusedTextColor = colorScheme.onSecondary,
                             cursorColor = colorScheme.onSecondary,
-                            unfocusedContainerColor = colorScheme.tertiary
+                            unfocusedContainerColor = colorScheme.tertiary,
+                            focusedContainerColor = colorScheme.tertiary
                         ),
                     )
                 }
@@ -111,9 +117,11 @@ fun TitleCard() {
         Image(
             painter = painterResource(R.drawable.padrao2),
             contentDescription = stringResource(R.string.card_pattern),
+            contentScale = ContentScale.Crop,
             modifier = Modifier
                 .align(Alignment.Center)
-                .graphicsLayer(scaleX = 2.8f, scaleY = 2.8f)
+                .size(800.dp)
+                .scale(1.3f)
         )
         Text(
             "Goals", color = colorScheme.onTertiary,
@@ -131,7 +139,6 @@ fun GoalCard(goalTitle: String) {
             .padding(horizontal = 8.dp, vertical = 5.dp)
             .fillMaxWidth(),
         shape = RoundedCornerShape(20.dp),
-        elevation = CardDefaults.cardElevation(defaultElevation = 10.dp),
         onClick = {},
         colors = CardDefaults.cardColors(
             containerColor = colorScheme.secondary
@@ -165,7 +172,9 @@ fun GoalCard(goalTitle: String) {
 
 @Composable
 fun RecyclerView(goals: List<String>){
-    LazyColumn() {
+    LazyColumn(
+        modifier = Modifier.height(480.dp).padding(bottom = 10.dp)
+    ) {
         items(items = goals){
             GoalCard(it)
         }

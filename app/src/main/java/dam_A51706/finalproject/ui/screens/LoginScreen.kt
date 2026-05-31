@@ -49,7 +49,7 @@ fun LoginScreenPortrait() {
             ){
                 Image(
                     painter = painterResource(R.drawable.s_mbolo_semfundo),
-                    contentDescription = stringResource(R.string.star_icon),
+                    contentDescription = stringResource(R.string.girafe),
                     modifier = Modifier
                         .padding(bottom = 30.dp)
                         .size(150.dp)
@@ -96,8 +96,10 @@ fun LoginCard(){
                     focusedBorderColor = colorScheme.onSecondary,
                     unfocusedBorderColor = colorScheme.secondary,
                     unfocusedTextColor = colorScheme.onSecondary,
+                    focusedTextColor = colorScheme.onSecondary,
                     cursorColor = colorScheme.onSecondary,
-                    unfocusedContainerColor = colorScheme.secondary
+                    unfocusedContainerColor = colorScheme.secondary,
+                    focusedContainerColor = colorScheme.secondary,
                 ),
             )
 
@@ -108,13 +110,13 @@ fun LoginCard(){
                 onValueChange = {},
                 modifier = Modifier.padding(horizontal = 5.dp),
                 colors = OutlinedTextFieldDefaults.colors(
-                    focusedBorderColor = colorScheme.secondary,
-                    focusedLabelColor = colorScheme.secondary,
+                    focusedBorderColor = colorScheme.onSecondary,
                     unfocusedBorderColor = colorScheme.secondary,
-                    unfocusedLabelColor = colorScheme.onSecondary,
-                    unfocusedTextColor = colorScheme.onPrimary,
-                    cursorColor = colorScheme.onPrimary,
-                    unfocusedContainerColor = colorScheme.secondary
+                    unfocusedTextColor = colorScheme.onSecondary,
+                    focusedTextColor = colorScheme.onSecondary,
+                    cursorColor = colorScheme.onSecondary,
+                    unfocusedContainerColor = colorScheme.secondary,
+                    focusedContainerColor = colorScheme.secondary,
                 ),
             )
             Button(
