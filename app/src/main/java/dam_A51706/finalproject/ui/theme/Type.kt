@@ -43,6 +43,13 @@ val appTypography = Typography(
         lineHeight = 28.sp,
         letterSpacing = 0.sp
     ),
+    titleMedium = TextStyle(
+        fontFamily = fontFamilyChau,
+        fontWeight = FontWeight.Normal,
+        fontSize = 30.sp,
+        lineHeight = 28.sp,
+        letterSpacing = 0.sp
+    ),
     labelSmall = TextStyle(
         fontFamily = fontFamilyQuest,
         fontWeight = FontWeight.Medium,

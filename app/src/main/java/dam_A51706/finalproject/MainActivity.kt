@@ -25,6 +25,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import dam_A51706.finalproject.ui.screens.GoalInfoPortrait
 import dam_A51706.finalproject.ui.screens.GoalsPortrait
 import dam_A51706.finalproject.ui.screens.LoginScreenPortrait
 import dam_A51706.finalproject.ui.screens.MainScreenPortrait
@@ -43,7 +44,8 @@ class MainActivity : ComponentActivity() {
                 //MainScreenPortrait()
                 //LoginScreenPortrait()
                 //RegisterScreenPortrait()
-                GoalsPortrait()
+                //GoalsPortrait()
+                GoalInfoPortrait()
             }
         }
     }

@@ -22,6 +22,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Star
@@ -69,6 +70,7 @@ fun GoalsPortrait() {
                 TitleCard()
                 Row(
                     horizontalArrangement = Arrangement.Center,
+                    verticalAlignment = Alignment.CenterVertically,
                     modifier = Modifier
                         .fillMaxWidth()
                         .background(color = colorScheme.secondary)
@@ -96,9 +98,21 @@ fun GoalsPortrait() {
                             focusedContainerColor = colorScheme.tertiary
                         ),
                     )
+                    IconButton(
+                        onClick = {}
+                    ) {
+                        Icon(
+                            Icons.Default.Add,
+                            contentDescription = stringResource(R.string.add_step),
+                            tint = colorScheme.tertiary,
+                            modifier = Modifier
+                                .height(50.dp)
+                                .width(50.dp)
+                        )
+                    }
                 }
                 Spacer(modifier = Modifier.height(50.dp))
-                RecyclerView(listOf("Correr a maratona", "Aprender italiano"))
+                RecyclerViewGoals(listOf("Correr a maratona", "Aprender italiano"))
             }
         }
     }
@@ -171,9 +185,9 @@ fun GoalCard(goalTitle: String) {
 }
 
 @Composable
-fun RecyclerView(goals: List<String>){
+fun RecyclerViewGoals(goals: List<String>){
     LazyColumn(
-        modifier = Modifier.height(480.dp).padding(bottom = 10.dp)
+        modifier = Modifier.height(480.dp)
     ) {
         items(items = goals){
             GoalCard(it)

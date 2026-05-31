@@ -13,4 +13,7 @@
     <string name="go_back">Go back</string>
     <string name="join_us">Join us!</string>
     <string name="girafe">Girafe</string>
+    <string name="edit">Edit</string>
+    <string name="add_step">Add step</string>
+    <string name="check">Check</string>
 </resources>
