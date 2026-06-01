@@ -81,10 +81,18 @@ fun GoalsPortrait() {
                         singleLine = true,
                         shape = RoundedCornerShape(25.dp),
                         leadingIcon = {
-                            Icon(
-                                Icons.Default.Search,
-                                contentDescription = stringResource(R.string.search_icon),
-                                tint = colorScheme.onTertiary )
+                            IconButton(
+                                onClick = {}
+                            ) {
+                                Icon(
+                                    Icons.Default.Search,
+                                    contentDescription = stringResource(R.string.search_icon),
+                                    tint = colorScheme.onTertiary,
+                                    modifier = Modifier
+                                        .height(30.dp)
+                                        .width(30.dp)
+                                )
+                            }
                         },
                         onValueChange = {},
                         modifier = Modifier.padding(horizontal = 5.dp),
