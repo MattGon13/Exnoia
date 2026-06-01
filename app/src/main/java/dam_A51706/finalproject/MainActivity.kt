@@ -47,7 +47,7 @@ class MainActivity : ComponentActivity() {
                 //RegisterScreenPortrait()
                 //GoalsPortrait()
                 //GoalInfoPortrait()
-                CreateEditGoalPortrait()
+                //CreateEditGoalPortrait()
             }
         }
     }
