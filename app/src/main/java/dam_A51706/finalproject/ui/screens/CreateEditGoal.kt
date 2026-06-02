@@ -13,6 +13,8 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.filled.Check
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
@@ -21,8 +23,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MaterialTheme.colorScheme
-import androidx.compose.material3.MenuAnchorType
-import androidx.compose.material3.MenuDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -40,10 +40,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dam_A51706.finalproject.R
 import dam_A51706.finalproject.ui.theme.ExnoiaAppTheme
-
-@Composable
-fun CreateEditGoalScreen() {
-}
 
 @Composable
 fun CreateEditGoalPortrait() {
@@ -156,6 +152,22 @@ fun CreateEditGoalPortrait() {
                 )
 
                 DropdownInput(listOf("Very easy", "Easy", "Medium", "Hard", "Very hard" ))
+
+                Spacer(modifier = Modifier.height(50.dp))
+
+                Button(
+                    onClick = {},
+                    modifier = Modifier.width(200.dp).height(50.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor =colorScheme.secondary,
+                        contentColor = colorScheme.onSecondary
+                    ),
+                    elevation = ButtonDefaults.buttonElevation(defaultElevation = 10.dp)
+                ) {
+                    Text("Delete",
+                        style = MaterialTheme.typography.labelLarge,
+                        color = colorScheme.tertiary)
+                }
             }
         }
     }

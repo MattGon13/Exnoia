@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.google.gms.google.services)
 }
 
 android {
@@ -51,6 +52,7 @@ dependencies {
     implementation(libs.androidx.compose.material3)
     implementation("androidx.compose.ui:ui-text-google-fonts:1.11.1")
     implementation ("io.github.vanpra.compose-material-dialogs:datetime:0.8.1-rc")
+    implementation(libs.firebase.auth)
     coreLibraryDesugaring ("com.android.tools:desugar_jdk_libs:2.1.5")
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
