@@ -1,7 +1,7 @@
 package dam_A51706.finalproject.ui.states
 
-import dam_A51706.finalproject.data.DifficultyLevel
-import dam_A51706.finalproject.data.Step
+import dam_A51706.finalproject.data.model.DifficultyLevel
+import dam_A51706.finalproject.data.model.Step
 import java.util.Date
 
 data class GoalState (

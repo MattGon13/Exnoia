@@ -1,4 +1,4 @@
-package dam_A51706.finalproject.data
+package dam_A51706.finalproject.data.model
 
 import java.util.Date
 
