@@ -1,11 +1,22 @@
 package dam_A51706.finalproject.ui.states
 
-data class LoginState (
-    val email: String = "",
-    val password: String = ""
-)
+import com.google.firebase.auth.FirebaseUser
 
-data class RegisterState(
-    val email:String = "",
+/**
+ * Indicates the state of the user authentication
+ */
+sealed class AuthUiState {
+    object Idle : AuthUiState()
+    object Loading : AuthUiState()
+    data class Success(val user: FirebaseUser) : AuthUiState()
+    data class Error(val message: String) : AuthUiState()
+    object LoggedOut : AuthUiState()
+}
+
+/**
+ * Keeps the state of the authentication forms (login and register)
+ */
+data class AuthFormState(
+    val email: String = "",
     val password: String = ""
 )

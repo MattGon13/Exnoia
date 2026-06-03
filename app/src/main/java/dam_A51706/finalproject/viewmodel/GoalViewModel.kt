@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.asStateFlow
 class GoalViewModel (application: Application): AndroidViewModel(application) {
 
     private val _goalState= MutableStateFlow(GoalState())
-    val weatherUIState: StateFlow<GoalState> = _goalState.asStateFlow()
+    val goalState: StateFlow<GoalState> = _goalState.asStateFlow()
 
 
 }

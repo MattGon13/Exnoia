@@ -53,6 +53,7 @@ dependencies {
     implementation("androidx.compose.ui:ui-text-google-fonts:1.11.1")
     implementation ("io.github.vanpra.compose-material-dialogs:datetime:0.8.1-rc")
     implementation(libs.firebase.auth)
+    implementation(libs.firebase.firestore)
     coreLibraryDesugaring ("com.android.tools:desugar_jdk_libs:2.1.5")
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
