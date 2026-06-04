@@ -27,6 +27,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.PointerEventPass
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import dam_A51706.finalproject.R
 import java.text.SimpleDateFormat
@@ -96,9 +97,12 @@ fun DatePickerFieldToModal(modifier: Modifier = Modifier) {
         value = selectedDate?.let { convertMillisToDate(it) } ?: "",
         onValueChange = { },
         label = {
-            Text(stringResource(R.string.deadline),
-            style = MaterialTheme.typography.bodyLarge,
-            color = colorScheme.tertiary)
+            Text(
+                stringResource(R.string.deadline),
+                style = MaterialTheme.typography.bodyLarge,
+                color = colorScheme.tertiary,
+                fontWeight = FontWeight.Bold
+            )
         },
         placeholder = { Text("DD/MM/YYYY") },
         trailingIcon = {

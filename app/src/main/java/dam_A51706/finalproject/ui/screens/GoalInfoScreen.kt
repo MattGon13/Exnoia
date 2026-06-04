@@ -18,6 +18,7 @@ import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.Checkbox
+import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -37,7 +38,6 @@ import dam_A51706.finalproject.ui.theme.ExnoiaAppTheme
 @Composable
 fun GoalInfoPortrait() {
     Scaffold(
-        bottomBar = { NavigationBar() },
     ) { padding ->
         Surface(color = MaterialTheme.colorScheme.surface) {
             Column(
@@ -45,7 +45,7 @@ fun GoalInfoPortrait() {
                 verticalArrangement = Arrangement.spacedBy(5.dp),
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(vertical = 20.dp)
+                    .padding(top = 20.dp)
             ) {
                 Row(
                     horizontalArrangement = Arrangement.SpaceBetween,
@@ -76,26 +76,30 @@ fun GoalInfoPortrait() {
                         )
                     }
                 }
-                Text("Correr a maratona",
-                    color = colorScheme.primary,
-                    style = MaterialTheme.typography.titleMedium,
-                    modifier = Modifier
-                        .align(Alignment.Start)
-                        .padding(start = 20.dp)
-                )
-                Text("Correr a maratona",
-                    color = colorScheme.tertiary,
-                    style = MaterialTheme.typography.bodyLarge,
-                    modifier = Modifier
-                        .align(Alignment.Start)
-                        .padding(start = 20.dp)
-                )
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.spacedBy(5.dp),
+                    modifier = Modifier.padding(horizontal = 20.dp)
+                ) {
+                    Text("Correr a maratona",
+                        color = colorScheme.primary,
+                        style = MaterialTheme.typography.titleMedium,
+                        modifier = Modifier
+                            .align(Alignment.Start)
+                    )
+                    Text("Correr a maratona de 50 km e ficar em primeiro",
+                        color = colorScheme.tertiary,
+                        style = MaterialTheme.typography.bodyLarge,
+                        modifier = Modifier
+                            .align(Alignment.Start)
+                    )
 
-                Spacer(modifier = Modifier.height(10.dp))
+                    Spacer(modifier = Modifier.height(10.dp))
 
-                DetailInfoRow("Deadline:", "10/10/2026")
-                DetailInfoRow("Reward:", "Buy a new phone")
-                DetailInfoRow("Difficulty:", "Very hard")
+                    DetailInfoRow("Deadline:", "10/10/2026")
+                    DetailInfoRow("Reward:", "Buy a new phone")
+                    DetailInfoRow("Difficulty:", "Very hard")
+                }
 
                 Spacer(modifier = Modifier.height(10.dp))
 
@@ -143,9 +147,9 @@ fun GoalSteps(steps: List<String>){
 @Composable
 fun RecyclerViewSteps(steps: List<String>){
     LazyColumn(
-        verticalArrangement = Arrangement.spacedBy(20.dp),
+        verticalArrangement = Arrangement.spacedBy(10.dp),
         modifier = Modifier
-            .height(480.dp)
+            .height(550.dp)
             .fillMaxWidth()
             .padding(start = 5.dp, end= 5.dp, top = 10.dp)
     ) {
@@ -158,18 +162,23 @@ fun RecyclerViewSteps(steps: List<String>){
 @Composable
 fun StepRow(title: String, done: Boolean) {
     Row(
-        horizontalArrangement = Arrangement.spacedBy(15.dp),
+        horizontalArrangement = Arrangement.spacedBy(5.dp),
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier.padding(start = 10.dp)
     ) {
         Checkbox(
             checked = done,
-            onCheckedChange = { }
+            onCheckedChange = { },
+            colors = CheckboxDefaults.colors(
+                uncheckedColor = colorScheme.onTertiary,
+                checkedColor = colorScheme.primary,
+                checkmarkColor = colorScheme.onTertiary,
+            )
         )
         Text(
             title,
             color = colorScheme.onTertiary,
-            style = MaterialTheme.typography.labelLarge
+            style = MaterialTheme.typography.labelMedium
         )
     }
 }
@@ -178,13 +187,12 @@ fun StepRow(title: String, done: Boolean) {
 fun DetailInfoRow(label: String, value: String) {
     Row(
         modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 20.dp),
+            .fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(10.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Text(label, color = colorScheme.tertiary, style = MaterialTheme.typography.labelMedium)
-        Text(value, color = colorScheme.secondary, style = MaterialTheme.typography.bodyLarge)
+        Text(label, color = colorScheme.secondary, style = MaterialTheme.typography.labelMedium)
+        Text(value, color = colorScheme.tertiary, style = MaterialTheme.typography.bodyLarge)
     }
 }
 

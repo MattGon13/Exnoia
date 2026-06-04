@@ -22,6 +22,7 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -48,6 +49,15 @@ import dam_A51706.finalproject.R
 fun GoalsPortrait() {
     Scaffold(
         bottomBar = { NavigationBar() },
+        floatingActionButton = {
+            FloatingActionButton(
+                onClick = {},
+                containerColor = colorScheme.tertiary,
+                contentColor = colorScheme.onTertiary
+            ) {
+                Icon(Icons.Filled.Add, stringResource(R.string.add_goal))
+            }
+        }
     ) { padding ->
         Surface(color = colorScheme.surface) {
             Column(
@@ -70,7 +80,7 @@ fun GoalsPortrait() {
                         shape = RoundedCornerShape(25.dp),
                         leadingIcon = {
                             IconButton(
-                                onClick = {}
+                                onClick = { println("GAYYY")}
                             ) {
                                 Icon(
                                     Icons.Default.Search,
@@ -94,18 +104,6 @@ fun GoalsPortrait() {
                             focusedContainerColor = colorScheme.tertiary
                         ),
                     )
-                    IconButton(
-                        onClick = {}
-                    ) {
-                        Icon(
-                            Icons.Default.Add,
-                            contentDescription = stringResource(R.string.add_step),
-                            tint = colorScheme.tertiary,
-                            modifier = Modifier
-                                .height(50.dp)
-                                .width(50.dp)
-                        )
-                    }
                 }
                 Spacer(modifier = Modifier.height(50.dp))
                 RecyclerViewGoals(listOf("Correr a maratona", "Aprender italiano"))
@@ -119,7 +117,7 @@ fun TitleCard() {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(200.dp)
+            .height(170.dp)
             .background(MaterialTheme.colorScheme.tertiary)
             .clip(RectangleShape),
 
@@ -173,7 +171,9 @@ fun GoalCard(goalTitle: String) {
                     Icons.AutoMirrored.Filled.KeyboardArrowRight,
                     contentDescription = stringResource(R.string.go_back),
                     tint = colorScheme.tertiary,
-                    modifier = Modifier.height(50.dp).width(50.dp)
+                    modifier = Modifier
+                        .height(50.dp)
+                        .width(50.dp)
                 )
             }
         }
