@@ -42,8 +42,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             ExnoiaAppTheme() {
-                //MainScreenPortrait()
-                GoalsPortrait()
+                MainScreenPortrait()
             }
         }
     }

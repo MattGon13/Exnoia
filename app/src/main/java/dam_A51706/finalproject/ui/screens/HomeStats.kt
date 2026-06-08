@@ -31,7 +31,7 @@ fun StatItem(label: String, value: String) {
 }
 
 @Composable
-fun MonthStats(completedGoals: Int, steps: Int){
+fun MonthStats(completedGoals: Int, completedSteps: Int){
     Card(
         modifier = Modifier.fillMaxWidth(),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.tertiary),
@@ -44,11 +44,14 @@ fun MonthStats(completedGoals: Int, steps: Int){
                 color = MaterialTheme.colorScheme.onTertiary,
                 style = MaterialTheme.typography.labelLarge,
             )
-            Spacer(modifier = Modifier.height(2.dp).background(color = MaterialTheme.colorScheme.onTertiary).fillMaxWidth())
+            Spacer(modifier = Modifier
+                .height(2.dp)
+                .background(color = MaterialTheme.colorScheme.onTertiary)
+                .fillMaxWidth())
             Spacer(modifier = Modifier.height(16.dp))
-            MonthlyStatRow("Metas concluídas:", "2")
+            MonthlyStatRow(stringResource(R.string.completed_goals), completedGoals.toString())
             Spacer(modifier = Modifier.height(10.dp))
-            MonthlyStatRow("Passos realizados:", "7")
+            MonthlyStatRow(stringResource(R.string.completed_steps), completedSteps.toString())
         }
     }
 }

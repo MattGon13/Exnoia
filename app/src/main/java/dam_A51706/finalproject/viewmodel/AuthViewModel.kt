@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 class AuthViewModel (application: Application): AndroidViewModel(application) {
     private val authRepo: AuthRepo = AuthRepo()
 
-    // State holder for authentication state that is observed by de authentication UI
+    // State holder for authentication state that is observed by the authentication UI
     private val _uiState = MutableStateFlow<AuthUiState>(AuthUiState.Idle)
     val uiState: StateFlow<AuthUiState> = _uiState.asStateFlow()
 

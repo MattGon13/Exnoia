@@ -27,4 +27,8 @@
     <string name="title">Title</string>
     <string name="confirm">Confirm</string>
     <string name="add_goal">Add goal</string>
+    <string name="completed_goals">Completed goals:</string>
+    <string name="completed_steps">Completed steps:</string>
+    <string name="logout">Logout</string>
+    <string name="steps">Steps</string>
 </resources>
