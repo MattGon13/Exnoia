@@ -36,6 +36,7 @@ import dam_A51706.finalproject.viewmodel.GoalViewModel
 fun MainScreenPortrait(
     goalViewModel: GoalViewModel = viewModel(),
     authViewModel: AuthViewModel = viewModel(),
+    onNavigateToGoals: () -> Unit = {},
     onLogout: () -> Unit = {}
 ) {
     val totalGoalsCount by goalViewModel.totalGoalsCount.collectAsState()

@@ -13,11 +13,15 @@ import dam_A51706.finalproject.R
 import dam_A51706.finalproject.ui.theme.ExnoiaAppTheme
 
 @Composable
-fun NavigationBar() {
+fun NavigationBar(
+    currentRoute: String = "main",
+    onNavigateToMain: () -> Unit = {},
+    onNavigateToGoals: () -> Unit = {}
+) {
     NavigationBar(containerColor = MaterialTheme.colorScheme.primary) {
         NavigationBarItem(
-            selected = true,
-            onClick = { },
+            selected = currentRoute == "main",
+            onClick = onNavigateToMain,
             icon = {
                 Icon(
                     Icons.Default.Home,
@@ -25,13 +29,13 @@ fun NavigationBar() {
                     tint = MaterialTheme.colorScheme.tertiary )
             },
             colors = NavigationBarItemDefaults.colors(
-                indicatorColor = MaterialTheme.colorScheme.onPrimary // Highlight color for selected
+                indicatorColor = MaterialTheme.colorScheme.onPrimary
             ),
             label = { Text(stringResource(R.string.home),  color = MaterialTheme.colorScheme.onPrimary) }
         )
         NavigationBarItem(
-            selected = false,
-            onClick = { },
+            selected = currentRoute == "goals",
+            onClick = onNavigateToGoals,
             icon = {
                 Icon(
                     Icons.Default.Star,
@@ -39,7 +43,7 @@ fun NavigationBar() {
                     tint = MaterialTheme.colorScheme.tertiary )
             },
             colors = NavigationBarItemDefaults.colors(
-                indicatorColor = MaterialTheme.colorScheme.onPrimary // Highlight color for selected
+                indicatorColor = MaterialTheme.colorScheme.onPrimary
             ),
             label = { Text(stringResource(R.string.goals), color = MaterialTheme.colorScheme.onPrimary) }
         )

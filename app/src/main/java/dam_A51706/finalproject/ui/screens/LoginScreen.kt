@@ -46,6 +46,7 @@ import dam_A51706.finalproject.ui.states.AuthUiState
 @Composable
 fun LoginScreenPortrait(
     authViewModel: AuthViewModel = viewModel(),
+    onNavigateToRegister: () -> Unit = {},
     onLoginSuccess: () -> Unit = {}
 ) {
 
@@ -87,7 +88,7 @@ fun LoginScreenPortrait(
             )
             Spacer(modifier = Modifier.height(10.dp))
 
-            LoginCard(authViewModel)
+            LoginCard(authViewModel, onNavigateToRegister)
 
             if (uiState is AuthUiState.Loading) {
                 Spacer(modifier = Modifier.height(20.dp))
@@ -107,7 +108,8 @@ fun LoginScreenPortrait(
 
 @Composable
 fun LoginCard(
-    authViewModel: AuthViewModel
+    authViewModel: AuthViewModel,
+    onNavigateToRegister: () -> Unit
 ){
     val formState by authViewModel.formState.collectAsState()
     val uiState by authViewModel.uiState.collectAsState()
@@ -190,7 +192,7 @@ fun LoginCard(
                     style = MaterialTheme.typography.bodyLarge
                 )
                 TextButton(
-                    onClick = {},
+                    onClick = onNavigateToRegister,
                     modifier = Modifier.height(50.dp)
                 ) {
                     Text(

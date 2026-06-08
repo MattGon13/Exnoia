@@ -42,6 +42,7 @@ import dam_A51706.finalproject.viewmodel.AuthViewModel
 @Composable
 fun RegisterScreenPortrait(
     authViewModel: AuthViewModel = viewModel(),
+    onNavigateToLogin: () -> Unit = {},
     onRegisterSuccess: () -> Unit = {}
 ) {
     val uiState by authViewModel.uiState.collectAsState()
@@ -70,7 +71,7 @@ fun RegisterScreenPortrait(
             )
             Spacer(modifier = Modifier.height(10.dp))
 
-            RegisterCard(authViewModel)
+            RegisterCard(authViewModel, onNavigateToLogin)
 
             if (uiState is AuthUiState.Loading) {
                 Spacer(modifier = Modifier.height(20.dp))
@@ -91,6 +92,7 @@ fun RegisterScreenPortrait(
 @Composable
 fun RegisterCard(
     authViewModel: AuthViewModel,
+    onNavigateToLogin: () -> Unit
 ){
     val formState by authViewModel.formState.collectAsState()
     val uiState by authViewModel.uiState.collectAsState()
@@ -172,7 +174,7 @@ fun RegisterCard(
                     style = MaterialTheme.typography.bodyLarge
                 )
                 TextButton(
-                    onClick = {},
+                    onClick = onNavigateToLogin,
                     modifier = Modifier.height(50.dp)
                 ) {
                     Text(
