@@ -58,5 +58,58 @@ fun AppNavGraph(
                 }
             )
         }
+        composable(Screen.Main.route) {
+            MainScreenPortrait(
+                goalViewModel = goalViewModel,
+                authViewModel = authViewModel,
+                onNavigateToGoals = {
+                    navController.navigate(Screen.Goals.route)
+                },
+                onLogout = {
+                    navController.navigate(Screen.Login.route) {
+                        popUpTo(0) { inclusive = true }
+                    }
+                }
+            )
+        }
+        composable(Screen.Goals.route) {
+            GoalsPortrait(
+                goalViewModel = goalViewModel,
+                onNavigateToMain = {
+                    navController.navigate(Screen.Main.route) {
+                        popUpTo(Screen.Main.route) { inclusive = true }
+                    }
+                },
+                onNavigateToGoalInfo = { _ ->
+                    navController.navigate(Screen.GoalInfo.route)
+                },
+                onNavigateToCreateGoal = {
+                    goalViewModel.initForm(null)
+                    navController.navigate(Screen.CreateEditGoal.route)
+                }
+            )
+        }
+        composable(Screen.GoalInfo.route) {
+            GoalInfoPortrait(
+                goalViewModel = goalViewModel,
+                onBack = {
+                    navController.navigateUp()
+                },
+                onNavigateToEditGoal = {
+                    navController.navigate(Screen.CreateEditGoal.route)
+                }
+            )
+        }
+        composable(Screen.CreateEditGoal.route) {
+            CreateEditGoalPortrait(
+                goalViewModel = goalViewModel,
+                onBack = {
+                    navController.navigateUp()
+                },
+                onSaveSuccess = {
+                    navController.navigateUp()
+                }
+            )
+        }
     }
 }

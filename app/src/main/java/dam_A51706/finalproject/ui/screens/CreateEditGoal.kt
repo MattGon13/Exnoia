@@ -41,9 +41,149 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dam_A51706.finalproject.R
 import dam_A51706.finalproject.ui.theme.ExnoiaAppTheme
+import dam_A51706.finalproject.viewmodel.GoalViewModel
 
 @Composable
-fun CreateEditGoalPortrait() {
+fun CreateEditGoalPortrait(
+    goalViewModel: GoalViewModel,
+    onBack: () -> Unit,
+    onSaveSuccess: () -> Unit
+) {
+    Scaffold(
+        bottomBar = { NavigationBar() },
+    ) { padding ->
+        Surface(color = MaterialTheme.colorScheme.surface) {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(10.dp),
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(vertical = 20.dp, horizontal = 10.dp)
+            ) {
+                Row(
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                ){
+                    IconButton(
+                        onClick = {}
+                    ) {
+                        Icon(
+                            Icons.AutoMirrored.Filled.KeyboardArrowLeft,
+                            contentDescription = stringResource(R.string.go_back),
+                            tint = colorScheme.tertiary,
+                            modifier = Modifier
+                                .height(50.dp)
+                                .width(50.dp)
+                        )
+                    }
+                    IconButton(
+                        onClick = {}
+                    ) {
+                        Icon(
+                            Icons.Default.Check,
+                            contentDescription = stringResource(R.string.edit),
+                            tint = colorScheme.tertiary,
+                            modifier = Modifier.size(30.dp)
+                        )
+                    }
+                }
+                TextField(
+                    value = "",
+                    onValueChange = {},
+                    singleLine = true,
+                    label = {
+                        Text(
+                            stringResource(R.string.title),
+                            style = MaterialTheme.typography.labelLarge,
+                            color = colorScheme.tertiary
+                        )
+                    },
+                    textStyle = MaterialTheme.typography.labelLarge,
+                    colors = TextFieldDefaults.colors(
+                        unfocusedContainerColor = colorScheme.onPrimary,
+                        focusedContainerColor = colorScheme.onPrimary,
+                        unfocusedIndicatorColor = colorScheme.primary,
+                        focusedIndicatorColor = colorScheme.secondary,
+                        unfocusedTextColor = colorScheme.tertiary,
+                        focusedTextColor = colorScheme.tertiary
+                    ),
+                )
+                TextField(
+                    value = "",
+                    onValueChange = {},
+                    label = {
+                        Text(
+                            stringResource(R.string.description),
+                            style = MaterialTheme.typography.bodyLarge,
+                            color = colorScheme.tertiary,
+                            fontWeight = FontWeight.Bold
+                        )
+                    },
+                    maxLines = 3,
+                    textStyle = MaterialTheme.typography.bodyLarge,
+                    colors = TextFieldDefaults.colors(
+                        unfocusedContainerColor = colorScheme.onPrimary,
+                        focusedContainerColor = colorScheme.onPrimary,
+                        unfocusedIndicatorColor = colorScheme.primary,
+                        focusedIndicatorColor = colorScheme.secondary,
+                        unfocusedTextColor = colorScheme.tertiary,
+                        focusedTextColor = colorScheme.tertiary
+                    ),
+                )
+
+                Spacer(modifier = Modifier.height(20.dp))
+
+                DatePickerFieldToModal()
+
+                TextField(
+                    value = "",
+                    onValueChange = {},
+                    singleLine = true,
+                    label = {
+                        Text(
+                            stringResource(R.string.reward),
+                            style = MaterialTheme.typography.bodyLarge,
+                            color = colorScheme.tertiary,
+                            fontWeight = FontWeight.Bold
+                        )
+                    },
+                    textStyle = MaterialTheme.typography.bodyLarge,
+                    colors = TextFieldDefaults.colors(
+                        unfocusedContainerColor = colorScheme.onPrimary,
+                        focusedContainerColor = colorScheme.onPrimary,
+                        unfocusedIndicatorColor = colorScheme.primary,
+                        focusedIndicatorColor = colorScheme.secondary,
+                        unfocusedTextColor = colorScheme.tertiary,
+                        focusedTextColor = colorScheme.tertiary
+                    ),
+                )
+
+                DropdownInput(listOf("Very easy", "Easy", "Medium", "Hard", "Very hard" ))
+
+                Spacer(modifier = Modifier.height(50.dp))
+
+                Button(
+                    onClick = {},
+                    modifier = Modifier.width(200.dp).height(50.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor =colorScheme.secondary,
+                        contentColor = colorScheme.onSecondary
+                    ),
+                    elevation = ButtonDefaults.buttonElevation(defaultElevation = 10.dp)
+                ) {
+                    Text("Delete",
+                        style = MaterialTheme.typography.labelLarge,
+                        color = colorScheme.tertiary)
+                }
+            }
+        }
+    }
+
+}
+
+@Composable
+fun CreateEditGoalPortraitPreview() {
     Scaffold(
         bottomBar = { NavigationBar() },
     ) { padding ->
@@ -243,6 +383,6 @@ fun DropdownInput(options: List<String>){
 @Composable
 fun CreateEditGoalPreview() {
     ExnoiaAppTheme() {
-        CreateEditGoalPortrait()
+        CreateEditGoalPortraitPreview()
     }
 }

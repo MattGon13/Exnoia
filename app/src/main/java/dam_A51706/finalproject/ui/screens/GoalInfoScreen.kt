@@ -34,9 +34,89 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dam_A51706.finalproject.R
 import dam_A51706.finalproject.ui.theme.ExnoiaAppTheme
+import dam_A51706.finalproject.viewmodel.GoalViewModel
 
 @Composable
-fun GoalInfoPortrait() {
+fun GoalInfoPortrait(
+    goalViewModel: GoalViewModel,
+    onBack: () -> Unit,
+    onNavigateToEditGoal: () -> Unit
+) {
+    Scaffold(
+    ) { padding ->
+        Surface(color = MaterialTheme.colorScheme.surface) {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(5.dp),
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(top = 20.dp)
+            ) {
+                Row(
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(start = 5.dp, end = 5.dp)
+                ){
+                    IconButton(
+                        onClick = {}
+                    ) {
+                        Icon(
+                            Icons.AutoMirrored.Filled.KeyboardArrowLeft,
+                            contentDescription = stringResource(R.string.go_back),
+                            tint = colorScheme.tertiary,
+                            modifier = Modifier
+                                .height(50.dp)
+                                .width(50.dp)
+                        )
+                    }
+                    IconButton(
+                        onClick = {}
+                    ) {
+                        Icon(
+                            Icons.Default.Edit,
+                            contentDescription = stringResource(R.string.edit),
+                            tint = colorScheme.tertiary,
+                            modifier = Modifier.size(30.dp)
+                        )
+                    }
+                }
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.spacedBy(5.dp),
+                    modifier = Modifier.padding(horizontal = 20.dp)
+                ) {
+                    Text("Correr a maratona",
+                        color = colorScheme.primary,
+                        style = MaterialTheme.typography.titleMedium,
+                        modifier = Modifier
+                            .align(Alignment.Start)
+                    )
+                    Text("Correr a maratona de 50 km e ficar em primeiro",
+                        color = colorScheme.tertiary,
+                        style = MaterialTheme.typography.bodyLarge,
+                        modifier = Modifier
+                            .align(Alignment.Start)
+                    )
+
+                    Spacer(modifier = Modifier.height(10.dp))
+
+                    DetailInfoRow("Deadline:", "10/10/2026")
+                    DetailInfoRow("Reward:", "Buy a new phone")
+                    DetailInfoRow("Difficulty:", "Very hard")
+                }
+
+                Spacer(modifier = Modifier.height(10.dp))
+
+                GoalSteps(listOf("Run 50 km", "Run 30 km"))
+            }
+        }
+    }
+
+}
+
+@Composable
+fun GoalInfoPortraitPreview() {
     Scaffold(
     ) { padding ->
         Surface(color = MaterialTheme.colorScheme.surface) {
@@ -200,6 +280,6 @@ fun DetailInfoRow(label: String, value: String) {
 @Composable
 fun GoalInfoPreview() {
     ExnoiaAppTheme() {
-        GoalInfoPortrait()
+        GoalInfoPortraitPreview()
     }
 }

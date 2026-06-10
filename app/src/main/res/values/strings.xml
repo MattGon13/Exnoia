@@ -31,4 +31,5 @@
     <string name="completed_steps">Completed steps:</string>
     <string name="logout">Logout</string>
     <string name="steps">Steps</string>
+    <string name="search">Search</string>
 </resources>
