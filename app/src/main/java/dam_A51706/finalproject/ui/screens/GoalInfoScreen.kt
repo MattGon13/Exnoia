@@ -1,6 +1,7 @@
 package dam_A51706.finalproject.ui.screens
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -27,14 +28,26 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.ReadOnlyComposable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.core.os.ConfigurationCompat
+import androidx.core.os.LocaleListCompat
 import dam_A51706.finalproject.R
+import dam_A51706.finalproject.data.model.Step
 import dam_A51706.finalproject.ui.theme.ExnoiaAppTheme
 import dam_A51706.finalproject.viewmodel.GoalViewModel
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 @Composable
 fun GoalInfoPortrait(
@@ -42,7 +55,21 @@ fun GoalInfoPortrait(
     onBack: () -> Unit,
     onNavigateToEditGoal: () -> Unit
 ) {
+    val goal by goalViewModel.selectedGoal.collectAsState()
+
+    var showStepDialog by remember { mutableStateOf(false) }
+    var editingStep by remember { mutableStateOf<Step?>(null) }
+
+    if (goal == null) {
+        onBack()
+        return
+    }
+
+    val currentGoal = goal!!
+    val dateFormat = SimpleDateFormat("dd/MM/yyyy", getLocale())
+
     Scaffold(
+        // removed bottomBar because GoalInfo does not have one
     ) { padding ->
         Surface(color = MaterialTheme.colorScheme.surface) {
             Column(
@@ -50,6 +77,7 @@ fun GoalInfoPortrait(
                 verticalArrangement = Arrangement.spacedBy(5.dp),
                 modifier = Modifier
                     .fillMaxSize()
+                    .padding(padding)
                     .padding(top = 20.dp)
             ) {
                 Row(
@@ -58,21 +86,18 @@ fun GoalInfoPortrait(
                         .fillMaxWidth()
                         .padding(start = 5.dp, end = 5.dp)
                 ){
-                    IconButton(
-                        onClick = {}
-                    ) {
+                    IconButton(onClick = onBack) {
                         Icon(
                             Icons.AutoMirrored.Filled.KeyboardArrowLeft,
                             contentDescription = stringResource(R.string.go_back),
                             tint = colorScheme.tertiary,
-                            modifier = Modifier
-                                .height(50.dp)
-                                .width(50.dp)
+                            modifier = Modifier.height(50.dp).width(50.dp)
                         )
                     }
-                    IconButton(
-                        onClick = {}
-                    ) {
+                    IconButton(onClick = {
+                        goalViewModel.initForm(currentGoal)
+                        onNavigateToEditGoal()
+                    }) {
                         Icon(
                             Icons.Default.Edit,
                             contentDescription = stringResource(R.string.edit),
@@ -86,13 +111,13 @@ fun GoalInfoPortrait(
                     verticalArrangement = Arrangement.spacedBy(5.dp),
                     modifier = Modifier.padding(horizontal = 20.dp)
                 ) {
-                    Text("Correr a maratona",
+                    Text(currentGoal.title,
                         color = colorScheme.primary,
                         style = MaterialTheme.typography.titleMedium,
                         modifier = Modifier
                             .align(Alignment.Start)
                     )
-                    Text("Correr a maratona de 50 km e ficar em primeiro",
+                    Text(currentGoal.description,
                         color = colorScheme.tertiary,
                         style = MaterialTheme.typography.bodyLarge,
                         modifier = Modifier
@@ -101,18 +126,84 @@ fun GoalInfoPortrait(
 
                     Spacer(modifier = Modifier.height(10.dp))
 
-                    DetailInfoRow("Deadline:", "10/10/2026")
-                    DetailInfoRow("Reward:", "Buy a new phone")
-                    DetailInfoRow("Difficulty:", "Very hard")
+                    DetailInfoRow("Deadline:", dateFormat.format(currentGoal.deadline))
+                    DetailInfoRow("Reward:", currentGoal.reward)
+                    DetailInfoRow("Difficulty:", currentGoal.difficulty.name)
                 }
 
                 Spacer(modifier = Modifier.height(10.dp))
 
-                GoalSteps(listOf("Run 50 km", "Run 30 km"))
+                Column(
+                    modifier = Modifier
+                        .background(color = colorScheme.tertiary)
+                        .padding(top = 10.dp, bottom = 50.dp)
+                        .fillMaxSize()
+                ) {
+                    Row(
+                        horizontalArrangement = Arrangement.End,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(start = 5.dp, end = 5.dp)
+                    ){
+                        IconButton(onClick = {
+                            editingStep = null
+                            showStepDialog = true
+                        }) {
+                            Icon(
+                                Icons.Default.Add,
+                                contentDescription = stringResource(R.string.add_step),
+                                tint = colorScheme.secondary,
+                                modifier = Modifier.height(50.dp).width(50.dp)
+                            )
+                        }
+                    }
+
+                    LazyColumn(
+                        verticalArrangement = Arrangement.spacedBy(10.dp),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(start = 5.dp, end= 5.dp, top = 10.dp)
+                    ) {
+                        items(currentGoal.steps, key = { it.id }) { step ->
+                            StepRow(
+                                title = step.title,
+                                done = step.isCompleted,
+                                onCheckedChange = { isChecked ->
+                                    goalViewModel.toggleStepComplete(currentGoal.id, step.id, isChecked)
+                                    //goalViewModel.checkGoalComplete(currentGoal.id)
+                                },
+                                onClick = {
+                                    editingStep = step
+                                    showStepDialog = true
+                                }
+                            )
+                        }
+                    }
+                }
             }
         }
     }
 
+    if (showStepDialog) {
+        MinimalDialog(
+            step = editingStep,
+            onDismissRequest = { showStepDialog = false },
+            onConfirmation = { newTitle ->
+                if (editingStep == null) {
+                    goalViewModel.addStep(currentGoal.id, newTitle)
+                } else {
+                    goalViewModel.updateStep(currentGoal.id, editingStep!!.id, newTitle)
+                }
+                showStepDialog = false
+            },
+            onDelete = if (editingStep != null) {
+                {
+                    goalViewModel.deleteStep(currentGoal.id, editingStep!!.id)
+                    showStepDialog = false
+                }
+            } else null
+        )
+    }
 }
 
 @Composable
@@ -234,21 +325,29 @@ fun RecyclerViewSteps(steps: List<String>){
             .padding(start = 5.dp, end= 5.dp, top = 10.dp)
     ) {
         items(items = steps){
-            StepRow(it, true)
+            StepRow(it, true, {}, {})
         }
     }
 }
 
 @Composable
-fun StepRow(title: String, done: Boolean) {
+fun StepRow(
+    title: String,
+    done: Boolean,
+    onCheckedChange: (Boolean) -> Unit,
+    onClick: () -> Unit
+) {
     Row(
         horizontalArrangement = Arrangement.spacedBy(5.dp),
         verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.padding(start = 10.dp)
+        modifier = Modifier
+            .padding(start = 10.dp)
+            .fillMaxWidth()
+            .clickable(onClick = onClick)
     ) {
         Checkbox(
             checked = done,
-            onCheckedChange = { },
+            onCheckedChange = onCheckedChange,
             colors = CheckboxDefaults.colors(
                 uncheckedColor = colorScheme.onTertiary,
                 checkedColor = colorScheme.primary,
@@ -274,6 +373,13 @@ fun DetailInfoRow(label: String, value: String) {
         Text(label, color = colorScheme.secondary, style = MaterialTheme.typography.labelMedium)
         Text(value, color = colorScheme.tertiary, style = MaterialTheme.typography.bodyLarge)
     }
+}
+
+@Composable
+@ReadOnlyComposable
+fun getLocale(): Locale {
+    val configuration = LocalConfiguration.current
+    return ConfigurationCompat.getLocales(configuration).get(0) ?: LocaleListCompat.getDefault()[0]!!
 }
 
 @Preview(showBackground = true, device = "spec:width=411dp,height=891dp,orientation=portrait")

@@ -49,13 +49,19 @@ fun MainScreenPortrait(
     goalViewModel.loadGoals()
 
     Scaffold(
-        bottomBar = { NavigationBar() },
+        bottomBar = {
+            NavigationBar(
+                currentRoute = "main",
+                onNavigateToGoals = onNavigateToGoals
+            )
+        },
     ) { padding ->
         Surface(color = MaterialTheme.colorScheme.surface) {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier
                     .fillMaxSize()
+                    .padding(padding)
                     .padding(horizontal = 10.dp, vertical = 10.dp)
             ) {
                 Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
@@ -65,7 +71,7 @@ fun MainScreenPortrait(
                     }) {
                         Icon(
                             Icons.AutoMirrored.Filled.ExitToApp,
-                            contentDescription = stringResource(R.string.logout),
+                            contentDescription = "Logout",
                             tint = MaterialTheme.colorScheme.tertiary,
                             modifier = Modifier.size(30.dp)
                         )
@@ -74,9 +80,7 @@ fun MainScreenPortrait(
                 Image(
                     painter = painterResource(R.drawable.icone_estrela),
                     contentDescription = stringResource(R.string.star_icon),
-                    modifier = Modifier
-                        .padding(top = 10.dp, bottom = 30.dp)
-                        .size(90.dp)
+                    modifier = Modifier.padding(top = 10.dp, bottom = 30.dp ).size(90.dp)
                 )
                 Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly) {
                     StatItem(stringResource(R.string.goals), "$totalGoalsCompleted/$totalGoalsCount")
@@ -89,7 +93,6 @@ fun MainScreenPortrait(
             }
         }
     }
-
 }
 
 @Composable

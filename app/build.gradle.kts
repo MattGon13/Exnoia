@@ -55,7 +55,6 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.firebase.auth)
     implementation(libs.firebase.firestore)
-    implementation(libs.androidx.navigation.runtime.ktx)
     implementation(libs.androidx.navigation.compose)
     coreLibraryDesugaring ("com.android.tools:desugar_jdk_libs:2.1.5")
     testImplementation(libs.junit)

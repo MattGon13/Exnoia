@@ -31,7 +31,7 @@ fun StatItem(label: String, value: String) {
 }
 
 @Composable
-fun MonthStats(completedGoals: Int, completedSteps: Int){
+fun MonthStats(completedGoals: Int, steps: Int){
     Card(
         modifier = Modifier.fillMaxWidth(),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.tertiary),
@@ -44,14 +44,11 @@ fun MonthStats(completedGoals: Int, completedSteps: Int){
                 color = MaterialTheme.colorScheme.onTertiary,
                 style = MaterialTheme.typography.labelLarge,
             )
-            Spacer(modifier = Modifier
-                .height(2.dp)
-                .background(color = MaterialTheme.colorScheme.onTertiary)
-                .fillMaxWidth())
+            Spacer(modifier = Modifier.height(2.dp).background(color = MaterialTheme.colorScheme.onTertiary).fillMaxWidth())
             Spacer(modifier = Modifier.height(16.dp))
             MonthlyStatRow(stringResource(R.string.completed_goals), completedGoals.toString())
             Spacer(modifier = Modifier.height(10.dp))
-            MonthlyStatRow(stringResource(R.string.completed_steps), completedSteps.toString())
+            MonthlyStatRow(stringResource(R.string.completed_steps), steps.toString())
         }
     }
 }
@@ -61,14 +58,5 @@ fun MonthlyStatRow(label: String, value: String) {
     Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
         Text(label, color = MaterialTheme.colorScheme.secondary)
         Text(value, color = MaterialTheme.colorScheme.onTertiary, style = MaterialTheme.typography.labelMedium)
-    }
-}
-
-@Preview(showBackground = true, device = "spec:width=411dp,height=891dp,orientation=portrait")
-@Composable
-fun StatsPreview() {
-    ExnoiaAppTheme() {
-        //StatItem("Metas", "11/20")
-        MonthStats(2, 7)
     }
 }

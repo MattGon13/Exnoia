@@ -82,11 +82,12 @@ fun GoalsPortrait(
             }
         }
     ) { padding ->
-        Surface(color = colorScheme.surface) {
+        Surface(color = MaterialTheme.colorScheme.surface) {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier
                     .fillMaxSize()
+                    .padding(padding)
             ) {
                 TitleCard()
                 Row(
@@ -131,7 +132,7 @@ fun GoalsPortrait(
                         placeholder = { Text(stringResource(R.string.search), color = colorScheme.onTertiary) }
                     )
                 }
-                Spacer(modifier = Modifier.height(50.dp))
+                Spacer(modifier = Modifier.height(20.dp))
                 LazyColumn(
                     modifier = Modifier.fillMaxSize().padding(horizontal = 10.dp)
                 ) {
@@ -239,7 +240,7 @@ fun TitleCard() {
             .background(MaterialTheme.colorScheme.tertiary)
             .clip(RectangleShape),
 
-    ) {
+        ) {
         Image(
             painter = painterResource(R.drawable.padrao2),
             contentDescription = stringResource(R.string.card_pattern),

@@ -29,6 +29,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -40,8 +41,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dam_A51706.finalproject.R
+import dam_A51706.finalproject.data.model.DifficultyLevel
 import dam_A51706.finalproject.ui.theme.ExnoiaAppTheme
 import dam_A51706.finalproject.viewmodel.GoalViewModel
+import java.util.Date
 
 @Composable
 fun CreateEditGoalPortrait(
@@ -49,15 +52,18 @@ fun CreateEditGoalPortrait(
     onBack: () -> Unit,
     onSaveSuccess: () -> Unit
 ) {
+    val formState by goalViewModel.formState.collectAsState()
+
     Scaffold(
-        bottomBar = { NavigationBar() },
+        // removed bottomBar
     ) { padding ->
-        Surface(color = MaterialTheme.colorScheme.surface) {
+        Surface(color = colorScheme.surface) {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.spacedBy(10.dp),
                 modifier = Modifier
                     .fillMaxSize()
+                    .padding(padding)
                     .padding(vertical = 20.dp, horizontal = 10.dp)
             ) {
                 Row(
@@ -66,7 +72,7 @@ fun CreateEditGoalPortrait(
                         .fillMaxWidth()
                 ){
                     IconButton(
-                        onClick = {}
+                        onClick = onBack
                     ) {
                         Icon(
                             Icons.AutoMirrored.Filled.KeyboardArrowLeft,
@@ -78,7 +84,9 @@ fun CreateEditGoalPortrait(
                         )
                     }
                     IconButton(
-                        onClick = {}
+                        onClick = {
+                            goalViewModel.saveGoal(onComplete = onSaveSuccess)
+                        }
                     ) {
                         Icon(
                             Icons.Default.Check,
@@ -89,8 +97,8 @@ fun CreateEditGoalPortrait(
                     }
                 }
                 TextField(
-                    value = "",
-                    onValueChange = {},
+                    value = formState.title,
+                    onValueChange = { goalViewModel.updateForm(title = it) },
                     singleLine = true,
                     label = {
                         Text(
@@ -99,7 +107,7 @@ fun CreateEditGoalPortrait(
                             color = colorScheme.tertiary
                         )
                     },
-                    textStyle = MaterialTheme.typography.labelLarge,
+                    textStyle = MaterialTheme.typography.bodyLarge,
                     colors = TextFieldDefaults.colors(
                         unfocusedContainerColor = colorScheme.onPrimary,
                         focusedContainerColor = colorScheme.onPrimary,
@@ -110,8 +118,8 @@ fun CreateEditGoalPortrait(
                     ),
                 )
                 TextField(
-                    value = "",
-                    onValueChange = {},
+                    value = formState.description,
+                    onValueChange = { goalViewModel.updateForm(description = it) },
                     label = {
                         Text(
                             stringResource(R.string.description),
@@ -134,11 +142,14 @@ fun CreateEditGoalPortrait(
 
                 Spacer(modifier = Modifier.height(20.dp))
 
-                DatePickerFieldToModal()
+                DatePickerFieldToModal(
+                    selectedDateMillis = formState.deadline?.time,
+                    onDateSelected = { it?.let { date -> goalViewModel.updateForm(deadline = Date(date)) } }
+                )
 
                 TextField(
-                    value = "",
-                    onValueChange = {},
+                    value = formState.reward,
+                    onValueChange = { goalViewModel.updateForm(reward = it) },
                     singleLine = true,
                     label = {
                         Text(
@@ -159,27 +170,36 @@ fun CreateEditGoalPortrait(
                     ),
                 )
 
-                DropdownInput(listOf("Very easy", "Easy", "Medium", "Hard", "Very hard" ))
+                DropdownInput(
+                    options = DifficultyLevel.values().toList(),
+                    selectedDifficulty = formState.difficulty,
+                    onOptionSelected = { goalViewModel.updateForm(difficulty = it) }
+                )
 
                 Spacer(modifier = Modifier.height(50.dp))
 
-                Button(
-                    onClick = {},
-                    modifier = Modifier.width(200.dp).height(50.dp),
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor =colorScheme.secondary,
-                        contentColor = colorScheme.onSecondary
-                    ),
-                    elevation = ButtonDefaults.buttonElevation(defaultElevation = 10.dp)
-                ) {
-                    Text("Delete",
-                        style = MaterialTheme.typography.labelLarge,
-                        color = colorScheme.tertiary)
+                if (formState.goalId != null) {
+                    Button(
+                        onClick = {
+                            goalViewModel.deleteGoal(formState.goalId!!) {
+                                onBack()
+                            }
+                        },
+                        modifier = Modifier.width(200.dp).height(50.dp),
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = colorScheme.secondary,
+                            contentColor = colorScheme.onSecondary
+                        ),
+                        elevation = ButtonDefaults.buttonElevation(defaultElevation = 10.dp)
+                    ) {
+                        Text("Delete",
+                            style = MaterialTheme.typography.labelLarge,
+                            color = colorScheme.tertiary)
+                    }
                 }
             }
         }
     }
-
 }
 
 @Composable
@@ -269,7 +289,7 @@ fun CreateEditGoalPortraitPreview() {
 
                 Spacer(modifier = Modifier.height(20.dp))
 
-                DatePickerFieldToModal()
+                //DatePickerFieldToModal()
 
                 TextField(
                     value = "",
@@ -294,7 +314,7 @@ fun CreateEditGoalPortraitPreview() {
                     ),
                 )
 
-                DropdownInput(listOf("Very easy", "Easy", "Medium", "Hard", "Very hard" ))
+                //DropdownInput(listOf("Very easy", "Easy", "Medium", "Hard", "Very hard" ))
 
                 Spacer(modifier = Modifier.height(50.dp))
 
@@ -319,17 +339,20 @@ fun CreateEditGoalPortraitPreview() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DropdownInput(options: List<String>){
+fun DropdownInput(
+    options: List<DifficultyLevel>,
+    selectedDifficulty: DifficultyLevel,
+    onOptionSelected: (DifficultyLevel) -> Unit
+){
 
     var isExpanded by remember { mutableStateOf(false) }
-    var selected by remember { mutableStateOf(options[0]) }
 
     ExposedDropdownMenuBox(
         expanded = isExpanded,
         onExpandedChange = {isExpanded = !isExpanded}
     ) {
         TextField(
-            value = selected,
+            value = selectedDifficulty.name,
             onValueChange = {},
             readOnly = true,
             label = {
@@ -359,15 +382,15 @@ fun DropdownInput(options: List<String>){
             onDismissRequest = { isExpanded = false },
             containerColor = colorScheme.surface
         ) {
-            options.forEachIndexed { index, text ->
+            options.forEach { option ->
                 DropdownMenuItem(
                     text = {
-                        Text(text = text,
+                        Text(text = option.name,
                             style = MaterialTheme.typography.bodyLarge,
                             color = colorScheme.tertiary)
                     },
                     onClick = {
-                        selected = options[index]
+                        onOptionSelected(option)
                         isExpanded = false
                     },
                     contentPadding = ExposedDropdownMenuDefaults.ItemContentPadding

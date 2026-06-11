@@ -38,9 +38,10 @@ import java.util.Locale
 @Composable
 fun DatePickerModal(
     onDateSelected: (Long?) -> Unit,
-    onDismiss: () -> Unit
+    onDismiss: () -> Unit,
+    initialDateMillis: Long? = null
 ) {
-    val datePickerState = rememberDatePickerState()
+    val datePickerState = rememberDatePickerState(initialSelectedDateMillis = initialDateMillis)
 
     DatePickerDialog(
         onDismissRequest = onDismiss,
@@ -62,7 +63,7 @@ fun DatePickerModal(
             }
         },
 
-    ) {
+        ) {
         DatePicker(
             state = datePickerState,
             title = {Text(stringResource(R.string.select_date),
@@ -89,12 +90,15 @@ fun DatePickerModal(
 
 
 @Composable
-fun DatePickerFieldToModal(modifier: Modifier = Modifier) {
-    var selectedDate by remember { mutableStateOf<Long?>(null) }
+fun DatePickerFieldToModal(
+    modifier: Modifier = Modifier,
+    selectedDateMillis: Long?,
+    onDateSelected: (Long?) -> Unit
+) {
     var showModal by remember { mutableStateOf(false) }
 
     TextField(
-        value = selectedDate?.let { convertMillisToDate(it) } ?: "",
+        value = selectedDateMillis?.let { convertMillisToDate(it) } ?: "",
         onValueChange = { },
         label = {
             Text(
@@ -121,11 +125,8 @@ fun DatePickerFieldToModal(modifier: Modifier = Modifier) {
             focusedTextColor = colorScheme.tertiary
         ),
         modifier = modifier
-            .pointerInput(selectedDate) {
+            .pointerInput(selectedDateMillis) {
                 awaitEachGesture {
-                    // Modifier.clickable doesn't work for text fields, so we use Modifier.pointerInput
-                    // in the Initial pass to observe events before the text field consumes them
-                    // in the Main pass.
                     awaitFirstDown(pass = PointerEventPass.Initial)
                     val upEvent = waitForUpOrCancellation(pass = PointerEventPass.Initial)
                     if (upEvent != null) {
@@ -136,7 +137,8 @@ fun DatePickerFieldToModal(modifier: Modifier = Modifier) {
     )
     if (showModal) {
         DatePickerModal(
-            onDateSelected = { selectedDate = it },
+            initialDateMillis = selectedDateMillis,
+            onDateSelected = onDateSelected,
             onDismiss = { showModal = false }
         )
     }

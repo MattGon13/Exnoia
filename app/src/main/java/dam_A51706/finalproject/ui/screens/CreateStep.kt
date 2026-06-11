@@ -19,6 +19,10 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -34,14 +38,15 @@ import dam_A51706.finalproject.ui.theme.ExnoiaAppTheme
 fun MinimalDialog(
     step: Step? = null,
     onDismissRequest: () -> Unit,
-    onConfirmation: () -> Unit,
+    onConfirmation: (String) -> Unit,
     onDelete: (() -> Unit)? = null
 ) {
+    var title by remember { mutableStateOf(step?.title ?: "") }
+
     Dialog(onDismissRequest = { onDismissRequest() }) {
         Card(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(280.dp)
                 .padding(16.dp),
             shape = RoundedCornerShape(16.dp),
             colors = CardDefaults.cardColors(containerColor = colorScheme.surface),
@@ -50,17 +55,19 @@ fun MinimalDialog(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.spacedBy(15.dp),
                 modifier = Modifier
-                    .fillMaxSize()
-                    .padding(vertical = 10.dp, horizontal = 10.dp)
+                    .fillMaxWidth()
+                    .padding(vertical = 20.dp, horizontal = 10.dp)
             ) {
-                Text("New step",
+                Text(
+                    text = if (step == null) "New step" else "Edit step",
                     style = MaterialTheme.typography.labelLarge,
                     color = colorScheme.tertiary,
-                    modifier = Modifier.padding(top = 20.dp))
+                    modifier = Modifier.padding(top = 10.dp)
+                )
 
                 TextField(
-                    value = "",
-                    onValueChange = {},
+                    value = title,
+                    onValueChange = { title = it },
                     singleLine = true,
                     label = {
                         Text(
@@ -69,7 +76,7 @@ fun MinimalDialog(
                             color = colorScheme.tertiary
                         )
                     },
-                    textStyle = MaterialTheme.typography.labelLarge,
+                    textStyle = MaterialTheme.typography.bodyLarge,
                     colors = TextFieldDefaults.colors(
                         unfocusedContainerColor = colorScheme.onPrimary,
                         focusedContainerColor = colorScheme.onPrimary,
@@ -80,29 +87,28 @@ fun MinimalDialog(
                     ),
                 )
 
-                Spacer(modifier = Modifier.weight(1F))
-
                 Row(
-                    modifier = Modifier
-                        .fillMaxWidth(),
+                    modifier = Modifier.fillMaxWidth().padding(top = 10.dp),
                     horizontalArrangement = Arrangement.End,
                 ) {
-                    TextButton(
-                        onClick = { onDismissRequest() },
-                        modifier = Modifier.padding(8.dp),
-                    ) {
-                        Text(stringResource(R.string.cancel),
-                            style = MaterialTheme.typography.labelMedium,
-                            color = colorScheme.primary)
+                    if (step != null && onDelete != null) {
+                        TextButton(
+                            onClick = onDelete,
+                            modifier = Modifier.padding(end = 8.dp),
+                        ) {
+                            Text("Delete", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.error)
+                        }
                     }
                     TextButton(
-                        onClick = { onConfirmation() },
-                        modifier = Modifier.padding(8.dp),
+                        onClick = onDismissRequest,
+                        modifier = Modifier.padding(end = 8.dp),
                     ) {
-                        Text(
-                            stringResource(R.string.confirm),
-                            style = MaterialTheme.typography.labelMedium,
-                            color = colorScheme.secondary)
+                        Text(stringResource(R.string.cancel), style = MaterialTheme.typography.labelMedium, color = colorScheme.primary)
+                    }
+                    TextButton(
+                        onClick = { onConfirmation(title) },
+                    ) {
+                        Text(stringResource(R.string.confirm), style = MaterialTheme.typography.labelMedium, color = colorScheme.secondary)
                     }
                 }
             }
