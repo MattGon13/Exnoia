@@ -1,5 +1,6 @@
 package dam_A51706.finalproject.data.model
 
+import com.google.firebase.firestore.PropertyName
 import java.util.Date
 
 data class Goal (
@@ -11,6 +12,7 @@ data class Goal (
     var difficulty: DifficultyLevel = DifficultyLevel.EASY,
     var steps: List<Step> = listOf(),
     var currentStep: Int = 0,
+    @get:PropertyName("isComplete") @set:PropertyName("isComplete")
     var isComplete: Boolean = false,
     var createdAt: Long = System.currentTimeMillis(),
     var completedAt: Long? = null

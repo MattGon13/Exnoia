@@ -69,9 +69,8 @@ fun GoalInfoPortrait(
     val dateFormat = SimpleDateFormat("dd/MM/yyyy", getLocale())
 
     Scaffold(
-        // removed bottomBar because GoalInfo does not have one
     ) { padding ->
-        Surface(color = MaterialTheme.colorScheme.surface) {
+        Surface(color = colorScheme.surface) {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.spacedBy(5.dp),
