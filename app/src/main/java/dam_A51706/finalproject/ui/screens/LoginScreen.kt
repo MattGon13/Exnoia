@@ -132,7 +132,8 @@ fun LoginCard(
                 singleLine = true,
                 shape = shapes.large,
                 onValueChange = { authViewModel.updateEmail(it) },
-                label = { Text("Email", color = colorScheme.onTertiary,
+                label = { Text(
+                    stringResource(R.string.email), color = colorScheme.onTertiary,
                     style = MaterialTheme.typography.labelSmall) },
                 modifier = Modifier.padding(horizontal = 5.dp),
                 colors = OutlinedTextFieldDefaults.colors(
@@ -151,7 +152,8 @@ fun LoginCard(
                 singleLine = true,
                 shape = shapes.large,
                 onValueChange = { authViewModel.updatePassword(it) },
-                label = { Text("Password", color = colorScheme.onTertiary,
+                label = { Text(
+                    stringResource(R.string.password), color = colorScheme.onTertiary,
                     style = MaterialTheme.typography.labelSmall) },
                 visualTransformation = PasswordVisualTransformation(),
                 modifier = Modifier.padding(horizontal = 5.dp),

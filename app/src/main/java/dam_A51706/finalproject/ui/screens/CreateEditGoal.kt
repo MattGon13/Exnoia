@@ -185,7 +185,9 @@ fun CreateEditGoalPortrait(
                                 onBack()
                             }
                         },
-                        modifier = Modifier.width(200.dp).height(50.dp),
+                        modifier = Modifier
+                            .width(200.dp)
+                            .height(50.dp),
                         colors = ButtonDefaults.buttonColors(
                             containerColor = colorScheme.secondary,
                             contentColor = colorScheme.onSecondary
@@ -320,14 +322,17 @@ fun CreateEditGoalPortraitPreview() {
 
                 Button(
                     onClick = {},
-                    modifier = Modifier.width(200.dp).height(50.dp),
+                    modifier = Modifier
+                        .width(200.dp)
+                        .height(50.dp),
                     colors = ButtonDefaults.buttonColors(
                         containerColor =colorScheme.secondary,
                         contentColor = colorScheme.onSecondary
                     ),
                     elevation = ButtonDefaults.buttonElevation(defaultElevation = 10.dp)
                 ) {
-                    Text("Delete",
+                    Text(
+                        stringResource(R.string.delete),
                         style = MaterialTheme.typography.labelLarge,
                         color = colorScheme.tertiary)
                 }

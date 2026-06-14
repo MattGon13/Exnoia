@@ -59,7 +59,7 @@ fun MinimalDialog(
                     .padding(vertical = 20.dp, horizontal = 10.dp)
             ) {
                 Text(
-                    text = if (step == null) "New step" else "Edit step",
+                    text = if (step == null) stringResource(R.string.new_step) else stringResource(R.string.edit_step),
                     style = MaterialTheme.typography.labelLarge,
                     color = colorScheme.tertiary,
                     modifier = Modifier.padding(top = 10.dp)
@@ -88,7 +88,9 @@ fun MinimalDialog(
                 )
 
                 Row(
-                    modifier = Modifier.fillMaxWidth().padding(top = 10.dp),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 10.dp),
                     horizontalArrangement = Arrangement.End,
                 ) {
                     if (step != null && onDelete != null) {

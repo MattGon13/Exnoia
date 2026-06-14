@@ -78,7 +78,7 @@ fun GoalsPortrait(
                 containerColor = colorScheme.tertiary,
                 contentColor = colorScheme.onTertiary
             ) {
-                Icon(Icons.Filled.Add, "Add goal")
+                Icon(Icons.Filled.Add, stringResource(R.string.add_goal))
             }
         }
     ) { padding ->

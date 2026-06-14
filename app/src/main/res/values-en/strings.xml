@@ -1,10 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Exnoia</string>
     <string name="star_icon">Star icon</string>
     <string name="home">Home</string>
     <string name="goals">Goals</string>
     <string name="this_month">This month</string>
-    <string name="login" translatable="false">Login</string>
     <string name="welcome_back">Welcome back!</string>
     <string name="don_t_have_an_account">Don\'t have an account?</string>
     <string name="sign_up">Sign up</string>
@@ -16,7 +16,6 @@
     <string name="edit">Edit</string>
     <string name="add_step">Add step</string>
     <string name="check">Check</string>
-    <string name="ok" translatable="false">OK</string>
     <string name="cancel">Cancel</string>
     <string name="add_date">Add date</string>
     <string name="deadline">Deadline</string>
@@ -27,16 +26,14 @@
     <string name="title">Title</string>
     <string name="confirm">Confirm</string>
     <string name="add_goal">Add goal</string>
-    <string name="completed_goals">Completed goals:</string>
+    <string name="completed_goals">"Completed goals: "</string>
     <string name="completed_steps">Completed steps:</string>
-    <string name="logout" translatable="false">Logout</string>
     <string name="steps">Steps</string>
     <string name="search">Search</string>
-    <string name="daily_motivation">Daily Motivation: %1$s</string>
+    <string name="daily_motivation">Daily motivation %1$s</string>
     <string name="daily_motivational_quotes">Daily Motivational Quotes</string>
     <string name="channel_for_daily_motivational_quotes">Channel for daily motivational quotes</string>
     <string name="password">Password</string>
-    <string name="email" translatable="false">Email</string>
     <string name="deadline2">Deadline:</string>
     <string name="reward2">Reward:</string>
     <string name="difficulty2">Difficulty:</string>

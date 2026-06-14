@@ -90,7 +90,9 @@ fun GoalInfoPortrait(
                             Icons.AutoMirrored.Filled.KeyboardArrowLeft,
                             contentDescription = stringResource(R.string.go_back),
                             tint = colorScheme.tertiary,
-                            modifier = Modifier.height(50.dp).width(50.dp)
+                            modifier = Modifier
+                                .height(50.dp)
+                                .width(50.dp)
                         )
                     }
                     IconButton(onClick = {
@@ -125,9 +127,9 @@ fun GoalInfoPortrait(
 
                     Spacer(modifier = Modifier.height(10.dp))
 
-                    DetailInfoRow("Deadline:", dateFormat.format(currentGoal.deadline))
-                    DetailInfoRow("Reward:", currentGoal.reward)
-                    DetailInfoRow("Difficulty:", currentGoal.difficulty.name)
+                    DetailInfoRow(stringResource(R.string.deadline2), dateFormat.format(currentGoal.deadline))
+                    DetailInfoRow(stringResource(R.string.reward2), currentGoal.reward)
+                    DetailInfoRow(stringResource(R.string.difficulty2), currentGoal.difficulty.name)
                 }
 
                 Spacer(modifier = Modifier.height(10.dp))
@@ -152,7 +154,9 @@ fun GoalInfoPortrait(
                                 Icons.Default.Add,
                                 contentDescription = stringResource(R.string.add_step),
                                 tint = colorScheme.secondary,
-                                modifier = Modifier.height(50.dp).width(50.dp)
+                                modifier = Modifier
+                                    .height(50.dp)
+                                    .width(50.dp)
                             )
                         }
                     }
@@ -161,7 +165,7 @@ fun GoalInfoPortrait(
                         verticalArrangement = Arrangement.spacedBy(10.dp),
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(start = 5.dp, end= 5.dp, top = 10.dp)
+                            .padding(start = 5.dp, end = 5.dp, top = 10.dp)
                     ) {
                         items(currentGoal.steps, key = { it.id }) { step ->
                             StepRow(
@@ -321,7 +325,7 @@ fun RecyclerViewSteps(steps: List<String>){
         modifier = Modifier
             .height(550.dp)
             .fillMaxWidth()
-            .padding(start = 5.dp, end= 5.dp, top = 10.dp)
+            .padding(start = 5.dp, end = 5.dp, top = 10.dp)
     ) {
         items(items = steps){
             StepRow(it, true, {}, {})

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Exnoia</string>
+    <string name="star_icon">Ícone estrela</string>
+    <string name="home">Principal</string>
+    <string name="goals">Metas</string>
+    <string name="this_month">Este mês</string>
+    <string name="welcome_back">Bem-vindo!</string>
+    <string name="don_t_have_an_account">Não tens conta?</string>
+    <string name="sign_up">Registar</string>
+    <string name="card_pattern">Padrão da carta</string>
+    <string name="search_icon">Ícone de pesquisa</string>
+    <string name="go_back">Voltar a trás</string>
+    <string name="join_us">Junta-te a nós!</string>
+    <string name="girafe">Girafa</string>
+    <string name="edit">Editar</string>
+    <string name="add_step">Adicionar passo</string>
+    <string name="check">Verificar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="add_date">Adicionar data</string>
+    <string name="deadline">Data limite</string>
+    <string name="select_date">Selecionar data</string>
+    <string name="difficulty">Dificuldade</string>
+    <string name="reward">Recompensa</string>
+    <string name="description">Descrição</string>
+    <string name="title">Título</string>
+    <string name="confirm">Confirmar</string>
+    <string name="add_goal">Adicionar meta</string>
+    <string name="completed_goals">Metas concluídas:</string>
+    <string name="completed_steps">Passos concluídos:</string>
+    <string name="steps">Passos</string>
+    <string name="search">Pesquisar</string>
+    <string name="daily_motivation">Motivação diária %1$s</string>
+    <string name="daily_motivational_quotes">Frases motivacionais diárias</string>
+    <string name="channel_for_daily_motivational_quotes">Canal para frases motivacionais diárias</string>
+    <string name="password">Palavra-passe</string>
+    <string name="deadline2">Data limite:</string>
+    <string name="reward2">Recompensa:</string>
+    <string name="difficulty2">DIificuldade:</string>
+    <string name="new_step">Novo passo</string>
+    <string name="edit_step">Editar passo</string>
+    <string name="delete">Eliminar</string>
+</resources>
