@@ -40,4 +40,9 @@
     <string name="new_step">Novo passo</string>
     <string name="edit_step">Editar passo</string>
     <string name="delete">Eliminar</string>
+    <string name="very_easy">Muito fácil</string>
+    <string name="easy">Fácil</string>
+    <string name="medium">Médio</string>
+    <string name="hard">Difícil</string>
+    <string name="very_hard">Muito difícil</string>
 </resources>

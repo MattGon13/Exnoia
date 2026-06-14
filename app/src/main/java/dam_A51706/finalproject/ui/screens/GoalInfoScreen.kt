@@ -129,7 +129,7 @@ fun GoalInfoPortrait(
 
                     DetailInfoRow(stringResource(R.string.deadline2), dateFormat.format(currentGoal.deadline))
                     DetailInfoRow(stringResource(R.string.reward2), currentGoal.reward)
-                    DetailInfoRow(stringResource(R.string.difficulty2), currentGoal.difficulty.name)
+                    DetailInfoRow(stringResource(R.string.difficulty2), stringResource(currentGoal.difficulty.stringId))
                 }
 
                 Spacer(modifier = Modifier.height(10.dp))

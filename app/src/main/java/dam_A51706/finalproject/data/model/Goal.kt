@@ -1,6 +1,7 @@
 package dam_A51706.finalproject.data.model
 
 import com.google.firebase.firestore.PropertyName
+import dam_A51706.finalproject.R
 import java.util.Date
 
 data class Goal (
@@ -18,10 +19,10 @@ data class Goal (
     var completedAt: Long? = null
 )
 
-enum class DifficultyLevel (){
-    VERY_EASY,
-    EASY,
-    MEDIUM,
-    HARD,
-    VERY_HARD
+enum class DifficultyLevel (var stringId: Int){
+    VERY_EASY(R.string.very_easy),
+    EASY(R.string.easy),
+    MEDIUM(R.string.medium),
+    HARD(R.string.hard),
+    VERY_HARD(R.string.very_hard)
 }

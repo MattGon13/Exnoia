@@ -194,7 +194,7 @@ fun CreateEditGoalPortrait(
                         ),
                         elevation = ButtonDefaults.buttonElevation(defaultElevation = 10.dp)
                     ) {
-                        Text("Delete",
+                        Text(stringResource(R.string.delete),
                             style = MaterialTheme.typography.labelLarge,
                             color = colorScheme.tertiary)
                     }
@@ -357,7 +357,7 @@ fun DropdownInput(
         onExpandedChange = {isExpanded = !isExpanded}
     ) {
         TextField(
-            value = selectedDifficulty.name,
+            value = stringResource(selectedDifficulty.stringId),
             onValueChange = {},
             readOnly = true,
             label = {
@@ -390,7 +390,7 @@ fun DropdownInput(
             options.forEach { option ->
                 DropdownMenuItem(
                     text = {
-                        Text(text = option.name,
+                        Text(text = stringResource(option.stringId),
                             style = MaterialTheme.typography.bodyLarge,
                             color = colorScheme.tertiary)
                     },

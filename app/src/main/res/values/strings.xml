@@ -43,4 +43,9 @@
     <string name="new_step">New step</string>
     <string name="edit_step">Edit step</string>
     <string name="delete">Delete</string>
+    <string name="very_easy">Very easy</string>
+    <string name="easy">Easy</string>
+    <string name="medium">Medium</string>
+    <string name="hard">Hard</string>
+    <string name="very_hard">Very hard</string>
 </resources>
